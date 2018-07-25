@@ -164,14 +164,15 @@ replace_pybin_path() {
     bin_dir=`dirname python3`
     pyversion=`ls pip3.* | rev | cut -c-3 | rev`
     pybin="python${pyversion}"
+    # "exec" "`dirname $(readlink -f $0)`/python" "$0" "$@"
 ${py_install_dir}/bin/python - <<-EOF
 files = ['pip3', 'pydoc3', 'pyvenv']
 for file in files:
-    if open(file).read(200).split("\n")[0].endswith("${pybin}"):
+    if open(file).read(200).split("\n")[0].endswith("${pybin}") or \
+            open(file).read(200).split("\n")[0].endswith("python"):
         lines = open(file).read().split("\n")
         lines[0] = "#!/bin/sh"
-        lines.insert(1, r'bindir=\`readlink -f \$0\`')
-        lines.insert(2, r'"exec" "\`dirname \${bindir}\`/python" "\$0" "\$@"')
+        lines.insert(1, r'"exec" "\`dirname \$(readlink -f \$0)\`/python" "\$0" "\$@"')
         with open(file, "w") as py_script:
             py_script.write("\n".join(lines))
 EOF
