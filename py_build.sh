@@ -164,11 +164,10 @@ replace_pybin_path() {
     bin_dir=`dirname python3`
     pyversion=`ls pip3.* | rev | cut -c-3 | rev`
     pybin="python${pyversion}"
-
-result=$(${py_install_dir}/bin/python - <<-EOF
+{py_install_dir}/bin/python - <<-EOF
 files = ['pip3', 'pydoc3', 'pyvenv']
 for file in files:
-    if open(file).read(200).split("\n")[0].endswith("{$pybin}"):
+    if open(file).read(200).split("\n")[0].endswith("${pybin}"):
         lines = open(file).read().split("\n")
         lines[0] = "#!/bin/sh"
         lines.insert(1, r'bindir=\`readlink -f \$0\`')
@@ -176,7 +175,6 @@ for file in files:
         with open(file, "w") as py_script:
             py_script.write("\n".join(lines))
 EOF
-)
 }
 
 install_pylib() {
