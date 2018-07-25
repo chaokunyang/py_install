@@ -164,7 +164,7 @@ replace_pybin_path() {
     bin_dir=`dirname python3`
     pyversion=`ls pip3.* | rev | cut -c-3 | rev`
     pybin="python${pyversion}"
-{py_install_dir}/bin/python - <<-EOF
+${py_install_dir}/bin/python - <<-EOF
 files = ['pip3', 'pydoc3', 'pyvenv']
 for file in files:
     if open(file).read(200).split("\n")[0].endswith("${pybin}"):
