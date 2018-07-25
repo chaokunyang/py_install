@@ -1,8 +1,10 @@
-# Python Offline Install
+# Python Offline Install Guide
 
-Python is an easy to learn, powerful programming language. But the long-term lack of pre-built distribution for linux offline free installation has been a headache (at least for me). This project is headed to fill the gap by **building a linux python distribution that can be used directly after extract from archive**.
+Python is an easy to learn, powerful programming language. But the long-term lack of pre-built distribution for linux offline free of installation has been a headache (at least for me). This project is headed to fill the gap by **building a linux python distribution that can be used directly after extracted from archive**.
 
-It don't need to be installed, don't pollute system directory such as `/usr/local/lib`. You can have any number of `python` installations on your machine in this way. It didn't make modifications to python source code. It compiles python and its dependencies to the same directory, and use some linux tricks to export `LD_LIBRARY_PATH` when execute `python` program, so python can find dynamic libs from ralative `lib` directory. Thus it can run on linux and at any file directory location. And also demonstrates a way using `pip` to download python libs and libs sdependencies for python libs offline installation. It is not a perfect way. but can be useful in many situation.
+It doesn't need to be installed, doesn't pollute system directory such as `/usr/local/lib`. If you want to install it, just copy archive to a directory, extract it, and export `PATH` environment variable if you wanted. You can have any number of `python` installations on your machine in this way. If you want to uninstall it, just delete the dir, and recover `PATH` environment variable if you set before. 
+
+It didn't make modifications to python source code. It compiles python and its dependencies to the same directory, and uses some linux tricks to export `LD_LIBRARY_PATH` when execute `python` program, so python can find dynamic libs from ralative `lib` directory. Thus it can run on linux and at any file directory location. And also demonstrates a way using `pip` to download python libs and libs dependencies for python libs offline installation. It is not a perfect way, but can be useful in many situations.
 
 ## Download python source code
 
@@ -94,7 +96,7 @@ Or you can do all in one big step
 ## Contribute
 
 * Issue Tracker: https://github.com/chaokunyang/py_build/issues
-* I'm not sure if there is a better way to do this, or it has be implemented by others. If you know, just tell me. I'll be appreciated.
+* I'm not sure if there is a better way to do this, or it has be implemented by others. If you know, just tell me. I'll be greatly appreciated.
 
 ## LICENSE
 
