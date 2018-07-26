@@ -2,6 +2,8 @@
 
 Python is an easy to learn, powerful programming language. But the long-term lack of pre-built distribution for linux offline free of installation has been a headache (at least for me). This project is headed to fill the gap by **building a linux python distribution that can be used directly after extracted from archive**.
 
+[中文文档](https://github.com/chaokunyang/py_install/blob/master/README-zh.md)
+
 It doesn't need to be installed, doesn't pollute system directory such as `/usr/local/lib`. If you want to install it, just copy archive to a directory, extract it, and export `PATH` environment variable if you wanted. You can have any number of `python` installations on your machine in this way. If you want to uninstall it, just delete the dir, and recover `PATH` environment variable if you set before. 
 
 It didn't make modifications to python source code. It compiles python and its dependencies to the same directory, and uses some linux tricks to export `LD_LIBRARY_PATH` when execute `python` program, so python can find dynamic libs from ralative `lib` directory. Thus it can run on linux and at any file directory location. And also demonstrates a way using `pip` to download python libs and libs dependencies for python libs offline installation. It is not a perfect way, but can be useful in many situations.
@@ -24,9 +26,9 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 
 If you want install python lib offline when install python, you can following the commands:
 
-* Create an requirements.txt file, and fill the lib
+* Create an `requirements.txt` file, and fill the lib
 
-    Example requirements.txt:
+    Example `requirements.txt`:
 
     ```text
     Flask==0.12
@@ -36,13 +38,13 @@ If you want install python lib offline when install python, you can following th
     pandas==0.22.0
     ```
 
-* Execute the command to download libs and dependencies of libs to directory wheelhouse (Of course on a machine which network connected and python installed)
+* Execute the command to download libs and dependencies of libs to directory wheelhouse (Of course on a machine with network connected, python installed, same operating system and cpu architecture)
 
     ```bash
     pip download -r requirements.txt -d wheelhouse
     ```
 
-* Archive requirements.txt and wheelhouse to `py_assembly.tar.gz`
+* Archive `requirements.txt` and wheelhouse to `py_assembly.tar.gz`
 * Or you can install python libs using following command after you download libs and dependencies of libs to directory wheelhouse
 
     ```bash
@@ -95,7 +97,7 @@ Or you can do all in one big step
 
 ## Contribute
 
-* Issue Tracker: https://github.com/chaokunyang/py_build/issues
+* Issue Tracker: https://github.com/chaokunyang/py_install/issues
 * I'm not sure if there is a better way to do this, or it has be implemented by others. If you know, just tell me. I'll be greatly appreciated.
 
 ## LICENSE
