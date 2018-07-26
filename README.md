@@ -39,7 +39,7 @@ If you want install python lib offline when install python, you can following th
 * Execute the command to download libs and dependencies of libs to directory wheelhouse (Of course on a machine which network connected and python installed)
 
     ```bash
-    pip install -r requirements.txt --no-index --find-links wheelhouse
+    pip download -r requirements.txt -d wheelhouse
     ```
 
 * Archive requirements.txt and wheelhouse to `py_assembly.tar.gz`
