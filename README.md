@@ -69,13 +69,13 @@ The archive should have the following contents
 Build python
 
 ```bash
-./py_build.sh build_python
+./py_install.sh build_python
 ```
 
 Install python libs (optional)
 
 ```bash
-./py_build.sh install_pylib
+./py_install.sh install_pylib
 ```
 
 Configure PATH environment variable
@@ -90,7 +90,7 @@ source ~/.bashrc
 Or you can do all in one big step
 
 ```bash
-./py_build.sh
+./py_install.sh
 ```
 
 ## Contribute
