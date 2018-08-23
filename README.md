@@ -1,18 +1,36 @@
 # Python Offline Install Guide
 
-Python is an easy to learn, powerful programming language. But the long-term lack of pre-built distribution for linux offline free of installation has been a headache (at least for me). This project is headed to fill the gap by **building a linux python distribution that can be used directly after extracted from archive**.
+Python is an easy to learn, powerful programming language. But the lack of pre-built distribution for linux offline installation sometimes can be a problem. This project provides **two ways to install python on linux offline**.
 
 [中文文档](https://github.com/chaokunyang/py_install/blob/master/README-zh.md)
 
-It doesn't need to be installed, doesn't pollute system directory such as `/usr/local/lib`. If you want to install it, just copy archive to a directory, extract it, and export `PATH` environment variable if you wanted. You can have any number of `python` installations on your machine in this way. If you want to uninstall it, just delete the dir, and recover `PATH` environment variable if you set before. 
+## Use anaconda for offline installation
+
+Using anaconda is definitely the choice you shoule make . I recommand you use anaconda.
+
+- Download anaconda
+    ```bash
+    wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+    ```
+- Install
+    Reference: https://conda.io/docs/user-guide/install/macos.html#install-macos-silent
+    ```bash
+    sh Anaconda3-5.2.0-Linux-x86_64.sh -b -p . -f
+    ```
+
+## Build python by yourslef and make some hacks
+
+It is definitely not a good choice, you only should use anaconda.
+
+Built python doesn't need to be installed, doesn't pollute system directory such as `/usr/local/lib`. If you want to install it, just copy archive to a directory, extract it, and export `PATH` environment variable if you wanted. You can have any number of `python` installations on your machine in this way. If you want to uninstall it, just delete the dir, and recover `PATH` environment variable if you set before. 
 
 It didn't make modifications to python source code. It compiles python and its dependencies to the same directory, and uses some linux tricks to export `LD_LIBRARY_PATH` when execute `python` program, so python can find dynamic libs from ralative `lib` directory. Thus it can run on linux and at any file directory location. And also demonstrates a way using `pip` to download python libs and libs dependencies for python libs offline installation. It is not a perfect way, but can be useful in many situations.
 
-## Download python source code
+### Download python source code
 
 python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 
-## Download dependencies
+### Download dependencies
 
 * bzip2: http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
 * zlib: https://zlib.net/zlib-1.2.11.tar.gz
@@ -22,7 +40,7 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 * ncurses: ftp://ftp.invisible-island.net/ncurses/ncurses-6.1.tar.gz
 * xz utils (lzma): https://excellmedia.dl.sourceforge.net/project/lzmautils/xz-5.2.4.tar.gz
 
-## Download python libs (optional)
+### Download python libs (optional)
 
 If you want install python lib offline when install python, you can following the commands:
 
@@ -51,7 +69,7 @@ If you want install python lib offline when install python, you can following th
     pip install -r requirements.txt --no-index --find-links wheelhouse
     ```
 
-## Package all files
+### Package all files
 
 The archive should have the following contents
 
@@ -66,7 +84,7 @@ The archive should have the following contents
 * xz-5.2.4.tar.gz
 * py_assembly.tar.gz (optional)
 
-## Compile and install native dependencies, python and python libs
+### Compile and install native dependencies, python and python libs
 
 Build python
 
@@ -85,7 +103,7 @@ Configure PATH environment variable
 ```bash
 echo "" >> ~/.bashrc
 echo "# Python" >> ~/.bashrc
-echo "export PATH=`pwd`/python/bin:$PATH" >> ~/.bashrc
+echo "export PATH=`pwd`/python/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 

@@ -1,16 +1,29 @@
 # Python 离线安装指南
 
-Python 是一门容易学习和强大的编程语言。 但是长期缺失以构建的Linux免安装离线发布，一直让人头疼。本项目试着解决这个问题，通过**构建一个可以类似于`JDK`那种可以直接使用免安装的`Python`发布**。
+Python 是一门容易学习和强大的编程语言。 但是缺失离线自定义安装方式有时会成为问题。本项目提供基于Anaconda和编译Python两种方式解决该问题。
+
+## Anaconda
+
+- 下载 anaconda
+    ```bash
+    wget https://repo.anaconda.com/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+    ```
+- 安装
+    Reference: https://conda.io/docs/user-guide/install/macos.html#install-macos-silent
+    ```bash
+    sh Anaconda3-5.2.0-Linux-x86_64.sh -b -p . -f
+    ```
+## 编译Python
 
 该发布不需要安装，不污染系统目录，比如`/usr/local/lib`. 如果你想要安装它，直接复制档案包到某个目录，解压皆可使用，如果你喜欢，也可以导出bin目录到环境变量。因此你可以在同一台机器上有任意多个`Python`安装，各个`Python`之间没有任何冲突，类似于`virtualenv`。如果需要卸载`Python`，直接删除安装目录即可(如果导出了PATH变量，需要从PATH变量移除该安装的bin路径)。
 
 该发布是通过编译`python`和依赖到同一个目录，然后在启动`python`时导出`LD_LIBRARY_PATH`，从而让`python`能够从相对的lib目录找到其依赖的动态库。本项目同时也展示了一种通过`pip`离线安装python lib及其依赖的方法。
 
-## 下载Python源码
+### 下载Python源码
 
 python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 
-## 下载Python依赖库源码
+### 下载Python依赖库源码
 
 * bzip2: http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz
 * zlib: https://zlib.net/zlib-1.2.11.tar.gz
@@ -20,7 +33,7 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 * ncurses: ftp://ftp.invisible-island.net/ncurses/ncurses-6.1.tar.gz
 * xz utils (lzma): https://excellmedia.dl.sourceforge.net/project/lzmautils/xz-5.2.4.tar.gz
 
-## 下载Python库wheel (可选)
+### 下载Python库wheel (可选)
 
 如果你想要离线安装python库及其依赖，参考下面步骤:
 
@@ -49,7 +62,7 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
     pip install -r requirements.txt --no-index --find-links wheelhouse
     ```
 
-## 打包所有文件
+### 打包所有文件
 
 档案包应该有下面这些内容：
 
@@ -64,7 +77,7 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 * xz-5.2.4.tar.gz
 * py_assembly.tar.gz (optional)
 
-## 编译和安装本地库、Python、Python库
+### 编译和安装本地库、Python、Python库
 
 构建 python
 
@@ -83,7 +96,7 @@ python3.6.6: https://www.python.org/ftp/python/3.6.6/Python-3.6.6.tgz
 ```bash
 echo "" >> ~/.bashrc
 echo "# Python" >> ~/.bashrc
-echo "export PATH=`pwd`/python/bin:$PATH" >> ~/.bashrc
+echo "export PATH=`pwd`/python/bin:\$PATH" >> ~/.bashrc
 source ~/.bashrc
 ```
 
