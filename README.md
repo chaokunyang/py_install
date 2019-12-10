@@ -121,3 +121,7 @@ Or you can do all in one big step
 ## LICENSE
 
 This project is licensed under Apache License 2.0.
+
+## See also
+
+For more complex scenarios, try https://github.com/indygreg/python-build-standalone/
